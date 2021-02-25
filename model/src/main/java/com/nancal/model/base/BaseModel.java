@@ -36,5 +36,5 @@ public class BaseModel {
     protected String updateBy;
 
     @ApiModelProperty(name = "是否删除")
-    protected boolean delFlag;
+    protected Boolean delFlag;
 }

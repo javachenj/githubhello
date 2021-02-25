@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="ProjectModuleManager">
+    <modules>
+      <module fileurl="file://$PROJECT_DIR$/common/common.iml" filepath="$PROJECT_DIR$/common/common.iml" />
+      <module fileurl="file://$PROJECT_DIR$/entity/entity.iml" filepath="$PROJECT_DIR$/entity/entity.iml" />
+      <module fileurl="file://$PROJECT_DIR$/minio/minio.iml" filepath="$PROJECT_DIR$/minio/minio.iml" />
+      <module fileurl="file://$PROJECT_DIR$/model/model.iml" filepath="$PROJECT_DIR$/model/model.iml" />
+      <module fileurl="file://$PROJECT_DIR$/nancal-demo.iml" filepath="$PROJECT_DIR$/nancal-demo.iml" />
+      <module fileurl="file://$PROJECT_DIR$/portal/portal.iml" filepath="$PROJECT_DIR$/portal/portal.iml" />
+    </modules>
+  </component>
+</project>

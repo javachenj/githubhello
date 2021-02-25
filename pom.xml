@@ -23,6 +23,7 @@
         <module>common</module>
         <module>portal</module>
         <module>model</module>
+        <module>minio</module>
     </modules>
 
     <properties>

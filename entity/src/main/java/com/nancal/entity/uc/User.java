@@ -10,7 +10,6 @@ import lombok.*;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import java.time.LocalDateTime;
-import java.util.Date;
 
 /**
  * @Description 用户entity定义

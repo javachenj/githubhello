@@ -5,10 +5,7 @@
 package com.nancal.web.base;
 
 import io.swagger.annotations.ApiModelProperty;
-import lombok.Builder;
-import lombok.Data;
-import lombok.EqualsAndHashCode;
-import lombok.ToString;
+import lombok.*;
 
 /**
  * @Description 全局统一返回结果处理
@@ -18,6 +15,8 @@ import lombok.ToString;
 @Data
 @ToString
 @EqualsAndHashCode
+@AllArgsConstructor
+@NoArgsConstructor
 @Builder
 public class MvcResult <T> {
     @ApiModelProperty(name = "响应码", example = "0")
