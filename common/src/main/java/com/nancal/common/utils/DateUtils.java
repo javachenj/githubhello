@@ -1,252 +1,156 @@
-/**
- * Nancal.com Inc.
- * Copyright (c) 2021- All Rights Reserved.
- */
 package com.nancal.common.utils;
 
+import org.apache.commons.lang3.time.DateFormatUtils;
+
+import java.lang.management.ManagementFactory;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
-import java.util.Calendar;
 import java.util.Date;
 
-import org.apache.commons.lang3.time.DateFormatUtils;
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
-
 /**
- * 日期工具类, 继承org.apache.commons.lang3.time.DateUtils类
+ * 时间工具类
  * 
- * @author zpp
- * @version 2015-12-30
+ * @author 
  */
-public class DateUtils extends org.apache.commons.lang3.time.DateUtils {
-	
-	private static final Logger log = LoggerFactory.getLogger(DateUtils.class);
+public class DateUtils extends org.apache.commons.lang3.time.DateUtils
+{
+    public static String YYYY = "yyyy";
 
-	private static String[] parsePatterns = { "yyyy-MM-dd",
-			"yyyy-MM-dd HH:mm:ss", "yyyy-MM-dd HH:mm", "yyyy/MM/dd",
-			"yyyy/MM/dd HH:mm:ss", "yyyy/MM/dd HH:mm" };
+    public static String YYYY_MM = "yyyy-MM";
 
-	/**
-	 * 得到当前日期字符串 格式（yyyy-MM-dd）
-	 * @return 当前日期
-	 */
-	public static String getDate() {
-		return getDate("yyyy-MM-dd");
-	}
+    public static String YYYY_MM_DD = "yyyy-MM-dd";
 
-	/**
-	 * 得到当前日期字符串 格式（yyyy-MM-dd） pattern可以为："yyyy-MM-dd" "HH:mm:ss" "E"
-	 * @return 当前日期
-	 */
-	public static String getDate(String pattern) {
-		return DateFormatUtils.format(new Date(), pattern);
-	}
+    public static String YYYYMMDDHHMMSS = "yyyyMMddHHmmss";
 
-	/**
-	 * 得到日期字符串 默认格式（yyyy-MM-dd） pattern可以为："yyyy-MM-dd" "HH:mm:ss" "E"
-	 * 
-	 * @param date 要格式话的日期
-	 * @param pattern 模式,默认"yyyy-MM-dd"
-	 * @return 格式化后的日期
-	 */
-	public static String formatDate(Date date, Object... pattern) {
-		String formatDate = null;
-		if (pattern != null && pattern.length > 0) {
-			formatDate = DateFormatUtils.format(date, pattern[0].toString());
-		} else {
-			formatDate = DateFormatUtils.format(date, "yyyy-MM-dd");
-		}
-		return formatDate;
-	}
+    public static String YYYY_MM_DD_HH_MM_SS = "yyyy-MM-dd HH:mm:ss";
+    
+    private static String[] parsePatterns = {
+            "yyyy-MM-dd", "yyyy-MM-dd HH:mm:ss", "yyyy-MM-dd HH:mm", "yyyy-MM", 
+            "yyyy/MM/dd", "yyyy/MM/dd HH:mm:ss", "yyyy/MM/dd HH:mm", "yyyy/MM",
+            "yyyy.MM.dd", "yyyy.MM.dd HH:mm:ss", "yyyy.MM.dd HH:mm", "yyyy.MM"};
 
-	/**
-	 * 得到当前时间字符串 格式（HH:mm:ss）
-	 * @return 
-	 */
-	public static String getTime() {
-		return formatDate(new Date(), "HH:mm:ss");
-	}
+    /**
+     * 获取当前Date型日期
+     * 
+     * @return Date() 当前日期
+     */
+    public static Date getNowDate()
+    {
+        return new Date();
+    }
 
-	/**
-	 * 得到当前日期和时间字符串 格式（yyyy-MM-dd HH:mm:ss）
-	 * @return
-	 */
-	public static String getDateTime() {
-		return formatDate(new Date(), "yyyy-MM-dd HH:mm:ss");
-	}
+    /**
+     * 获取当前日期, 默认格式为yyyy-MM-dd
+     * 
+     * @return String
+     */
+    public static String getDate()
+    {
+        return dateTimeNow(YYYY_MM_DD);
+    }
 
-	/**
-	 * 得到当前年份字符串 格式（yyyy）
-	 * @return
-	 */
-	public static String getYear() {
-		return formatDate(new Date(), "yyyy");
-	}
+    public static final String getTime()
+    {
+        return dateTimeNow(YYYY_MM_DD_HH_MM_SS);
+    }
 
-	/**
-	 * 得到当前月份字符串 格式（MM）
-	 * @return
-	 */
-	public static String getMonth() {
-		return formatDate(new Date(), "MM");
-	}
+    public static final String dateTimeNow()
+    {
+        return dateTimeNow(YYYYMMDDHHMMSS);
+    }
 
-	/**
-	 * 得到当天字符串 格式（dd）
-	 * @return
-	 */
-	public static String getDay() {
-		return formatDate(new Date(), "dd");
-	}
+    public static final String dateTimeNow(final String format)
+    {
+        return parseDateToStr(format, new Date());
+    }
 
-	/**
-	 * 得到当前星期字符串 格式（E）星期几
-	  * @return
-	 */
-	public static String getWeek() {
-		return formatDate(new Date(), "E");
-	}
+    public static final String dateTime(final Date date)
+    {
+        return parseDateToStr(YYYY_MM_DD, date);
+    }
 
-	/**
-	 * 日期型字符串转化为日期 格式 { "yyyy-MM-dd", "yyyy-MM-dd HH:mm:ss", "yyyy-MM-dd HH:mm",
-	 * "yyyy/MM/dd", "yyyy/MM/dd HH:mm:ss", "yyyy/MM/dd HH:mm" }
-	 * @param str
-	 * @return
-	 */
-	public static Date parseDate(Object str) {
-		if (str == null) {
-			return null;
-		}
-		try {
-			return parseDate(str.toString(), parsePatterns);
-		} catch (ParseException e) {
-			return null;
-		}
-	}
+    public static final String parseDateToStr(final String format, final Date date)
+    {
+        return new SimpleDateFormat(format).format(date);
+    }
 
-	/**
-	 * 获取过去的天数
-	 * 
-	 * @param date
-	 * @return
-	 */
-	public static long pastDays(Date date) {
-		long t = new Date().getTime() - date.getTime();
-		return t / (24 * 60 * 60 * 1000);
-	}
+    public static final Date dateTime(final String format, final String ts)
+    {
+        try
+        {
+            return new SimpleDateFormat(format).parse(ts);
+        }
+        catch (ParseException e)
+        {
+            throw new RuntimeException(e);
+        }
+    }
 
-	/**
-	 * 获取 与今天相隔  num 天的 @see Date
-	 * @param num
-	 * @return
-	 */
-	public static Date nextDay(int num) {
-		Calendar curr = Calendar.getInstance();
-		curr.set(Calendar.DAY_OF_MONTH, curr.get(Calendar.DAY_OF_MONTH) + num);
-		return curr.getTime();
-	}
+    /**
+     * 日期路径 即年/月/日 如2018/08/08
+     */
+    public static final String datePath()
+    {
+        Date now = new Date();
+        return DateFormatUtils.format(now, "yyyy/MM/dd");
+    }
 
-	/**
-	 * 获取 与今天相隔  num 月的 @see Date
-	 * @param num
-	 * @return
-	 */
-	public static Date nextMonth(int num) {
-		Calendar curr = Calendar.getInstance();
-		curr.set(Calendar.MONTH, curr.get(Calendar.MONTH) + num);
-		return curr.getTime();
-	}
+    /**
+     * 日期路径 即年/月/日 如20180808
+     */
+    public static final String dateTime()
+    {
+        Date now = new Date();
+        return DateFormatUtils.format(now, "yyyyMMdd");
+    }
 
-	/**
-	 * 获取 与今天相隔  num 年的 @see Date
-	 * @param num
-	 * @return
-	 */
-	public static Date nextYear(int num) {
-		Calendar curr = Calendar.getInstance();
-		curr.set(Calendar.YEAR, curr.get(Calendar.YEAR) + num);
-		return curr.getTime();
-	}
+    /**
+     * 日期型字符串转化为日期 格式
+     */
+    public static Date parseDate(Object str)
+    {
+        if (str == null)
+        {
+            return null;
+        }
+        try
+        {
+            return parseDate(str.toString(), parsePatterns);
+        }
+        catch (ParseException e)
+        {
+            return null;
+        }
+    }
+    
+    /**
+     * 获取服务器启动时间
+     */
+    public static Date getServerStartDate()
+    {
+        long time = ManagementFactory.getRuntimeMXBean().getStartTime();
+        return new Date(time);
+    }
 
-	/**
-	 * 获取指定日期的@see Calendar
-	 * @param date
-	 * @return
-	 */
-	public static Calendar getCalendar(Date date) {
-		Calendar calendar = Calendar.getInstance();
-		// calendar.setFirstDayOfWeek(Calendar.SUNDAY);//每周从周日开始
-		// calendar.setMinimalDaysInFirstWeek(1); // 设置每周最少为1天
-		if(date != null) {
-			calendar.setTime(date);
-		}
-		return calendar;
-	}
-
-	/**
-	 * 计算两个日期之间相差多少天
-	 * 
-	 * @param start
-	 * @param end
-	 * @return
-	 * @throws ParseException
-	 */
-	public static long getDaysBetween(Date start, Date end) {
-		long diff = end.getTime() - start.getTime();
-		return diff / (24l * 60l * 60l * 1000l);
-	}
-
-	/**
-	 * 计算两个日期之间相差多少周
-	 * 
-	 * @param start 起始日期
-	 * @param end 结束日期
-	 * @return 周数
-	 */
-	public static long getWeeksBetween(Date start, Date end) {
-		//归零开始时间的时分秒、毫秒
-		Calendar calendar_start = getCalendar(start);
-		calendar_start.set(Calendar.HOUR_OF_DAY, 0);
-		calendar_start.set(Calendar.MINUTE, 0);
-		calendar_start.set(Calendar.SECOND, 0);
-		calendar_start.setFirstDayOfWeek(Calendar.SUNDAY);
-		
-		//归零结束时间的时分秒、毫秒
-		Calendar calendar_end = getCalendar(end);
-		calendar_end.set(Calendar.HOUR_OF_DAY, 0);
-		calendar_end.set(Calendar.MINUTE, 0);
-		calendar_end.set(Calendar.SECOND, 0);
-		calendar_end.setFirstDayOfWeek(Calendar.SUNDAY);
-		
-		calendar_start.set(Calendar.DAY_OF_WEEK, calendar_start.getFirstDayOfWeek());
-		log.debug("开始时间===" + formatDate(calendar_start.getTime(), "yyyy-MM-dd HH:mm:ss"));
-		
-		calendar_end.set(Calendar.DAY_OF_WEEK, calendar_end.getFirstDayOfWeek());
-		log.debug("结束时间===" + formatDate(calendar_end.getTime(), "yyyy-MM-dd HH:mm:ss"));
-		
-		long diff = calendar_end.getTimeInMillis() - calendar_start.getTimeInMillis();
-		return diff/(7*24*60*60*1000);
-		
-	}
-	/** 
-	* 获得指定日期的后一天 
-	* @param specifiedDay 
-	* @return 
-	*/ 
-	public static String getSpecifiedDayAfter(String specifiedDay){ 
-		Calendar c = Calendar.getInstance(); 
-		Date date=null; 
-		try { 
-			date = new SimpleDateFormat("yy-MM-dd").parse(specifiedDay); 
-		} catch (ParseException e) { 
-			e.printStackTrace(); 
-		} 
-		c.setTime(date); 
-		int day=c.get(Calendar.DATE); 
-		c.set(Calendar.DATE,day+1); 
-	
-		String dayAfter=new SimpleDateFormat("yyyy-MM-dd").format(c.getTime()); 
-		return dayAfter; 
-	} 
+    /**
+     * 计算两个时间差
+     */
+    public static String getDatePoor(Date endDate, Date nowDate)
+    {
+        long nd = 1000 * 24 * 60 * 60;
+        long nh = 1000 * 60 * 60;
+        long nm = 1000 * 60;
+        // long ns = 1000;
+        // 获得两个时间的毫秒时间差异
+        long diff = endDate.getTime() - nowDate.getTime();
+        // 计算差多少天
+        long day = diff / nd;
+        // 计算差多少小时
+        long hour = diff % nd / nh;
+        // 计算差多少分钟
+        long min = diff % nd % nh / nm;
+        // 计算差多少秒//输出结果
+        // long sec = diff % nd % nh % nm / ns;
+        return day + "天" + hour + "小时" + min + "分钟";
+    }
 }

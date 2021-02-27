@@ -1,0 +1,30 @@
+{
+  "groups": [
+    {
+      "name": "minio",
+      "type": "com.nancal.minio.base.entity.MinioProp",
+      "sourceType": "com.nancal.minio.base.entity.MinioProp"
+    }
+  ],
+  "properties": [
+    {
+      "name": "minio.accesskey",
+      "type": "java.lang.String",
+      "description": "用户名",
+      "sourceType": "com.nancal.minio.base.entity.MinioProp"
+    },
+    {
+      "name": "minio.endpoint",
+      "type": "java.lang.String",
+      "description": "连接地址",
+      "sourceType": "com.nancal.minio.base.entity.MinioProp"
+    },
+    {
+      "name": "minio.secretkey",
+      "type": "java.lang.String",
+      "description": "密码",
+      "sourceType": "com.nancal.minio.base.entity.MinioProp"
+    }
+  ],
+  "hints": []
+}

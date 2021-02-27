@@ -1,0 +1,13 @@
+com\nancal\entity\QBaseEntity.class
+com\nancal\entity\BaseEntity.class
+com\nancal\entity\uc\User.class
+com\nancal\entity\uc\QUserTest.class
+com\nancal\entity\uc\DemoData.class
+com\nancal\entity\uc\UserTest$UserTestBuilder.class
+com\nancal\entity\uc\QDemoData.class
+com\nancal\entity\uc\UserTest.class
+com\nancal\entity\uc\User$UserBuilder.class
+com\nancal\entity\uc\QUser.class
+com\nancal\entity\uc\File$FileBuilder.class
+com\nancal\entity\uc\File.class
+com\nancal\entity\uc\QFile.class

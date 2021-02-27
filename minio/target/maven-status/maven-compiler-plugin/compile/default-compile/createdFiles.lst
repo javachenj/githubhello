@@ -1,0 +1,7 @@
+com\nancal\minio\dao\FileDao.class
+com\nancal\minio\base\MvcResult.class
+com\nancal\minio\service\FileService.class
+com\nancal\minio\base\BaseService.class
+com\nancal\minio\test\TestTaskSchedule.class
+com\nancal\minio\base\MvcResult$MvcResultBuilder.class
+com\nancal\minio\controller\MinIoController.class
